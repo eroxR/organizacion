@@ -1,0 +1,11 @@
+.fallido{
+    border: #ff0000;
+}
+
+.msj-activo{
+display: block;
+}
+
+.msj{
+display: none;
+}
