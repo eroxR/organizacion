@@ -14,4 +14,8 @@ class roles extends Model
     {
         return $this->belongsToMany('App\Models\empleado');
     }
+
+    protected $fillable = [
+        'nombre',
+    ];
 }

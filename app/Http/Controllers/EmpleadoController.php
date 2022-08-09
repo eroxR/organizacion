@@ -51,14 +51,14 @@ class EmpleadoController extends Controller
     public function store(StoreempleadoRequest $request)
     {
         //
-        $request->validate([
-            'nombre' => 'required',
-            'email' => 'required|email',
-            'sex' => 'required',
-            'area' => 'required',
-            'descripcion' => 'required',
-            'rol' => 'required',
-        ]);
+        // $request->validate([
+        //     'nombre' => 'required',
+        //     'email' => 'required|email',
+        //     'sex' => 'required',
+        //     'area' => 'required',
+        //     'descripcion' => 'required',
+        //     'rol' => 'required',
+        // ]);
 
         if ($request->boletin != 1) {
             $boletin = 0;

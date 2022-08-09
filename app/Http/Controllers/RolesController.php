@@ -16,6 +16,9 @@ class RolesController extends Controller
     public function index()
     {
         //
+        $roles = roles::all();
+
+        return view('rol.index', compact('roles'));
     }
 
     /**
@@ -26,6 +29,7 @@ class RolesController extends Controller
     public function create()
     {
         //
+        return view('rol.create');
     }
 
     /**
@@ -37,6 +41,12 @@ class RolesController extends Controller
     public function store(StorerolesRequest $request)
     {
         //
+        roles::create([
+
+            'nombre' => $request->nombre
+        ]);
+
+        return redirect()->action([RolesController::class, 'index']);
     }
 
     /**
@@ -56,9 +66,11 @@ class RolesController extends Controller
      * @param  \App\Models\roles  $roles
      * @return \Illuminate\Http\Response
      */
-    public function edit(roles $roles)
+    public function edit($id)
     {
         //
+        $rol = roles::findOrFail($id);
+        return view('rol.edit', compact('rol'));
     }
 
     /**
@@ -68,9 +80,19 @@ class RolesController extends Controller
      * @param  \App\Models\roles  $roles
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdaterolesRequest $request, roles $roles)
+    public function update(UpdaterolesRequest $request, $id)
     {
         //
+        
+        // $roles = $request->nombreRol;
+
+        // $roles->save();
+
+        $roles = request()->except(['_token','_method']);
+
+        roles::where('id','=',$id)->update($roles);
+
+        return redirect()->action([RolesController::class, 'index']);
     }
 
     /**
@@ -79,8 +101,11 @@ class RolesController extends Controller
      * @param  \App\Models\roles  $roles
      * @return \Illuminate\Http\Response
      */
-    public function destroy(roles $roles)
+    public function destroy($id)
     {
         //
+        roles::destroy($id);
+
+        return redirect('rol');
     }
 }

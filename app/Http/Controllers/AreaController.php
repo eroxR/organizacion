@@ -16,6 +16,9 @@ class AreaController extends Controller
     public function index()
     {
         //
+        $areas = area::all();
+
+        return view('area.index', compact('areas'));
     }
 
     /**
@@ -26,6 +29,7 @@ class AreaController extends Controller
     public function create()
     {
         //
+        return view('area.create');
     }
 
     /**
@@ -37,6 +41,15 @@ class AreaController extends Controller
     public function store(StoreareaRequest $request)
     {
         //
+         area::create([
+
+            'nombre' => $request->nombreArea
+        ]);
+        // $area = request()->except('_token');
+        // return response()->json($area);
+        // area::insert($area);
+
+        return redirect()->action([AreaController::class, 'index']);
     }
 
     /**
@@ -56,9 +69,12 @@ class AreaController extends Controller
      * @param  \App\Models\area  $area
      * @return \Illuminate\Http\Response
      */
-    public function edit(area $area)
+    public function edit($id)
     {
         //
+
+        $area = area::findOrFail($id);
+        return view('area.edit', compact('area'));
     }
 
     /**
@@ -71,6 +87,11 @@ class AreaController extends Controller
     public function update(UpdateareaRequest $request, area $area)
     {
         //
+
+        $area->nombre = $request->nombreArea;
+
+        $area->save();
+        return redirect()->action([AreaController::class, 'index']);
     }
 
     /**
@@ -79,8 +100,11 @@ class AreaController extends Controller
      * @param  \App\Models\area  $area
      * @return \Illuminate\Http\Response
      */
-    public function destroy(area $area)
+    public function destroy($id)
     {
         //
+        area::destroy($id);
+
+        return redirect('area');
     }
 }

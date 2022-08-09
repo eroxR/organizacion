@@ -19,7 +19,7 @@
                             </div>
                         @endif
 
-                        <table class="table table-dark table-striped">
+                        <table class="table table-dark table-striped rounded">
                             <thead>
                                 <tr>
                                     <th scope="col"> <span><i class="fas fa-user"></i></span> Nombre</th>
